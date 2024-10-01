@@ -10,13 +10,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-public class TarefaCategoria {
+public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String nome;
+	private String senha;
 	
-	public TarefaCategoria(String nome) {
+	public Usuario(String nome, String senha) {
 		this.nome = nome;
+		this.senha = senha;
 	}
 }

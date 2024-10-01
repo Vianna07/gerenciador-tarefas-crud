@@ -9,11 +9,11 @@
   <body>
     <div class="container-sm">
     	<h1 class="text-center">Categorias da Terefa</h1>
-	    <form th:action="@{/salvarCategoria}" th:object="${categoria}" method="post">
+	    <form th:action="@{/usuario/save}" th:object="${usuario}" method="POST">
 		  <div class="mb-3">
 		  	<input type="hidden" th:field="*{id}"></input>
-		    <label for="exampleInputEmail1" class="form-label">Nome</label>
-		    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{nome}">
+		    <label for="inputName" class="form-label">Nome</label>
+		    <input type="text" class="form-control" id="inputName" th:field="*{nome}">
 		  </div>
 		  <button type="submit" class="btn btn-primary">Enviar</button>
 		</form>
