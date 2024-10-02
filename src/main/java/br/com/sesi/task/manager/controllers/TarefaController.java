@@ -11,54 +11,54 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.sesi.task.manager.models.TarefaCategoria;
+import br.com.sesi.task.manager.models.Tarefa;
 import br.com.sesi.task.manager.models.Usuario;
-import br.com.sesi.task.manager.repositories.UsuarioRepository;
+import br.com.sesi.task.manager.repositories.TarefaRepository;
 
 @Controller
-@RequestMapping("/usuario")
-public class UsuarioController {
+@RequestMapping("/tarefa")
+public class TarefaController {
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private TarefaRepository tarefaRepository;
 	
 	@GetMapping
 	public String entrypoint() {
-		return "redirect:/usuario/list";
+		return "redirect:/tarefa/list";
 	}
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		model.addAttribute("usuarios", usuarioRepository.findAll());
-		return "usuario/list";
+		model.addAttribute("tarefas", tarefaRepository.findAll());
+		return "tarefa/list";
 	}
 	
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") int id, Model model) {
-		Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
+		Optional<Tarefa> tarefaOpt = tarefaRepository.findById(id);
 		
-		if (usuarioOpt.isPresent()) {
-			model.addAttribute("usuario", usuarioOpt.get());
-			return "usuario/form";
+		if (tarefaOpt.isPresent()) {
+			model.addAttribute("tarefa", tarefaOpt.get());
+			return "tarefa/form";
 		}
 		
-		return "redirect:/usuario/list";
+		return "redirect:/tarefa/list";
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable("id") int id) {
-		usuarioRepository.deleteById(id);		
-		return "redirect:/usuario/list";
+		tarefaRepository.deleteById(id);		
+		return "redirect:/tarefa/list";
 	}
 	
 	@GetMapping("/form")
 	public String form(Model model) {
-		model.addAttribute("usuario", new Usuario());
-		return "usuario/form";
+		model.addAttribute("tarefa", new Tarefa());
+		return "tarefa/form";
 	}
 	
 	@PostMapping("/save")
-	public String save(@ModelAttribute Usuario usuario) {
-		usuarioRepository.save(usuario);
-		return "redirect:/usuario/list";
+	public String save(@ModelAttribute Tarefa tarefa) {
+		tarefaRepository.save(tarefa);
+		return "redirect:/tarefa/list";
 	}
 }

@@ -1,5 +1,6 @@
 package br.com.sesi.task.manager.config;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,9 +10,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import br.com.sesi.task.manager.enums.Prioridade;
+import br.com.sesi.task.manager.enums.StatusTarefa;
+import br.com.sesi.task.manager.models.Tarefa;
 import br.com.sesi.task.manager.models.TarefaCategoria;
 import br.com.sesi.task.manager.models.Usuario;
 import br.com.sesi.task.manager.repositories.TarefaCategoriaRepository;
+import br.com.sesi.task.manager.repositories.TarefaRepository;
 import br.com.sesi.task.manager.repositories.UsuarioRepository;
 
 @Configuration
@@ -22,12 +27,15 @@ public class CarregaBaseDeDados {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
+	@Autowired
+	private TarefaRepository tarefaRepository;
+	
 	@Bean
 	public CommandLineRunner executar() {
 		return args -> {
 			List<TarefaCategoria> categorias = new ArrayList<TarefaCategoria>(
 					Arrays.asList(
-							new TarefaCategoria("Estudar"),
+							new TarefaCategoria("Estudos"),
 							new TarefaCategoria("Dormir"),
 							new TarefaCategoria("Comer"),
 							new TarefaCategoria("Jogar"),
@@ -45,8 +53,15 @@ public class CarregaBaseDeDados {
 					)
 			);
 			
+			List<Tarefa> tarefas = new ArrayList<Tarefa>(
+					Arrays.asList(
+							new Tarefa("Estudar Spring Boot", StatusTarefa.A_FAZER, LocalDate.now(), Prioridade.MEDIA, true, categorias.get(0), usuarios.get(0))
+					)
+			);
+			
 			tarefaCategoriaRepository.saveAll(categorias);
 			usuarioRepository.saveAll(usuarios);
+			tarefaRepository.saveAll(tarefas);
 		};
 	}
 }

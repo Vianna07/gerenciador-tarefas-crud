@@ -12,7 +12,7 @@
 	    <form th:action="@{/tarefa-categoria/save}" th:object="${categoria}" method="POST">
 		  <div class="mb-3">
 		  	<input type="hidden" th:field="*{id}"></input>
-		    <label for="exampleInputEmail1" class="form-label">Nome</label>
+		    <label for="inputName" class="form-label">Nome</label>
 		    <input type="text" class="form-control" id="inputName" th:field="*{nome}">
 		  </div>
 		  <button type="submit" class="btn btn-primary">Enviar</button>

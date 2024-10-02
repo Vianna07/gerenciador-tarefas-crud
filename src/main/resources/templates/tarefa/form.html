@@ -8,12 +8,12 @@
   </head>
   <body>
     <div class="container-sm">
-    	<h1 class="text-center">Usuario</h1>
-	    <form th:action="@{/usuario/save}" th:object="${usuario}" method="POST">
+    	<h1 class="text-center">Tarefas</h1>
+	    <form th:action="@{/tarefa/save}" th:object="${tarefa}" method="POST">
 			<div class="mb-3">
 				<input type="hidden" th:field="*{id}"></input>
 		    	<label for="inputName" class="form-label">Nome</label>
-		    	<input type="text" class="form-control" id="inputName" th:field="*{nome}">		  
+		    	<input type="text" class="form-control" id="inputName" th:field="*{descricao}">		  
 			</div>
 			<button type="submit" class="btn btn-primary">Enviar</button>
 		</form>
