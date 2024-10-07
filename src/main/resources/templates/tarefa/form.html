@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,6 +15,51 @@
 		    	<label for="inputName" class="form-label">Nome</label>
 		    	<input type="text" class="form-control" id="inputName" th:field="*{descricao}">		  
 			</div>
+			
+			<div class="mb-3">
+				<label for="usuario" class="form-label">Usuário</label>
+		    	<select class="form-control" id="usuario" th:field="*{usuario}">
+		    		<option th:each="usuario : ${usuarios}"
+		    				th:value="${usuario.id}"
+		    				th:text="${usuario.nome}">
+	    				Usuário
+		    		</option>
+		    	</select>		  
+			</div>
+			
+			<div class="mb-3">
+				<label for="categoria" class="form-label">Categoria</label>
+		    	<select class="form-control" id="categoria" th:field="*{tarefaCategoria}">
+		    		<option th:each="categoria : ${categorias}"
+		    				th:value="${categoria.id}"
+		    				th:text="${categoria.nome}">
+	    				Categoria
+		    		</option>
+		    	</select>		  
+			</div>
+			
+			<div class="mb-3">
+				<label for="prioridade" class="form-label">Prioridade</label>
+		    	<select class="form-control" id="prioridade" th:field="*{prioridade}">
+		    		<option th:each="prioridadeEnum : ${T(br.com.sesi.task.manager.enums.Prioridade).values()}"
+		    				th:value="${prioridadeEnum}"
+		    				th:text="${prioridadeEnum}">
+	    				Prioridade
+		    		</option>
+		    	</select>		  
+			</div>
+			
+			<div class="mb-3">
+				<label for="status" class="form-label">Status</label>
+		    	<select class="form-control" id="status" th:field="*{status}">
+		    		<option th:each="statusEnum : ${T(br.com.sesi.task.manager.enums.StatusTarefa).values()}"
+		    				th:value="${statusEnum}"
+		    				th:text="${statusEnum}">
+	    				Status
+		    		</option>
+		    	</select>		  
+			</div>
+			
 			<button type="submit" class="btn btn-primary">Enviar</button>
 		</form>
     </div>

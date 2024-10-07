@@ -13,13 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.sesi.task.manager.models.Tarefa;
 import br.com.sesi.task.manager.models.Usuario;
+import br.com.sesi.task.manager.repositories.TarefaCategoriaRepository;
 import br.com.sesi.task.manager.repositories.TarefaRepository;
+import br.com.sesi.task.manager.repositories.UsuarioRepository;
 
 @Controller
 @RequestMapping("/tarefa")
 public class TarefaController {
 	@Autowired
 	private TarefaRepository tarefaRepository;
+	
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private TarefaCategoriaRepository tarefaCategoriaRepository;
 	
 	@GetMapping
 	public String entrypoint() {
@@ -38,6 +46,8 @@ public class TarefaController {
 		
 		if (tarefaOpt.isPresent()) {
 			model.addAttribute("tarefa", tarefaOpt.get());
+			model.addAttribute("usuarios", usuarioRepository.findAll());
+			model.addAttribute("categorias", tarefaCategoriaRepository.findAll());
 			return "tarefa/form";
 		}
 		
@@ -53,11 +63,13 @@ public class TarefaController {
 	@GetMapping("/form")
 	public String form(Model model) {
 		model.addAttribute("tarefa", new Tarefa());
+		model.addAttribute("usuarios", usuarioRepository.findAll());
+		model.addAttribute("categorias", tarefaCategoriaRepository.findAll());
 		return "tarefa/form";
 	}
 	
 	@PostMapping("/save")
-	public String save(@ModelAttribute Tarefa tarefa) {
+	public String save(Tarefa tarefa) {
 		tarefaRepository.save(tarefa);
 		return "redirect:/tarefa/list";
 	}

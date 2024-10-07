@@ -56,7 +56,7 @@ public class TarefaCategoriaController {
 	}
 	
 	@PostMapping("/save")
-	public String save(@ModelAttribute TarefaCategoria categoria) {
+	public String save(TarefaCategoria categoria) {
 		tarefaCategoriaRepository.save(categoria);
 		return "redirect:/tarefa-categoria/list";
 	}
