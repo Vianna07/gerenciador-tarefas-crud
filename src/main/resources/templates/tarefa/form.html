@@ -12,7 +12,7 @@
 	    <form th:action="@{/tarefa/save}" th:object="${tarefa}" method="POST">
 			<div class="mb-3">
 				<input type="hidden" th:field="*{id}"></input>
-		    	<label for="inputName" class="form-label">Nome</label>
+		    	<label for="inputName" class="form-label">Descrição</label>
 		    	<input type="text" class="form-control" id="inputName" th:field="*{descricao}">		  
 			</div>
 			
